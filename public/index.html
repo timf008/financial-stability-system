@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Financial Stability Analyzer</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+
+<body>
+  <div class="container">
+    <h1>Financial Stability Analyzer</h1>
+
+    <section class="inputs">
+      <h2>Monthly Inputs</h2>
+
+      <label>Monthly net income:
+        <input type="number" placeholder="$0" />
+      </label>
+
+      <label>Monthly debt payments:
+        <input type="number" placeholder="$0" />
+      </label>
+
+      <label>Monthly savings:
+        <input type="number" placeholder="$0" />
+      </label>
+
+      <label>Monthly investments:
+        <input type="number" placeholder="$0" />
+      </label>
+
+      <label>Monthly fixed costs:
+        <input type="number" placeholder="$0" />
+      </label>
+
+      <div class="computed">
+        <strong>Monthly Financial Margin:</strong>
+        <span class="value">17%</span>
+      </div>
+    </section>
+
+    <section class="table-section">
+      <h2>Factor Breakdown</h2>
+
+      <table>
+        <thead>
+          <tr>
+            <th>Factor</th>
+            <th>Result</th>
+            <th>Score</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Debt burden</td>
+            <td>8%</td>
+            <td>9.4</td>
+          </tr>
+          <tr>
+            <td>Savings rate</td>
+            <td>15%</td>
+            <td>8.5</td>
+          </tr>
+          <tr>
+            <td>Investment rate</td>
+            <td>18%</td>
+            <td>10.0</td>
+          </tr>
+          <tr>
+            <td>Fixed costs</td>
+            <td>42%</td>
+            <td>7.2</td>
+          </tr>
+          <tr>
+            <td>Financial margin</td>
+            <td>17%</td>
+            <td>8.3</td>
+          </tr>
+        </tbody>
+      </table>
+    </section>
+
+    <section class="score-section">
+      <h2>Financial Stability Score</h2>
+      <div class="score-display">
+        <span class="score">7.6 / 10</span>
+        <span class="status stable">STABLE</span>
+      </div>
+      <p class="scale">Strong → Stable → Weak → Unstable</p>
+    </section>
+
+    <section class="profile">
+      <h2>Your Financial Profile</h2>
+      <p><strong>Strongest:</strong> Investment Rate</p>
+      <p><strong>Biggest Opportunity:</strong> Fixed Costs</p>
+
+      <h3>Personal Financial Report</h3>
+      <p>
+        Your overall financial position is stable, with strong investment contributions and manageable debt.
+        Your fixed-cost burden is the primary factor limiting your score. Reducing fixed costs by approximately
+        X% would have the greatest impact on your stability score.
+      </p>
+    </section>
+
+    <section class="what-if">
+      <h2>What If?</h2>
+      <ul>
+        <li>Current Score: 7.6</li>
+        <li>If debt decreases by $300/month: 8.1</li>
+        <li>If savings increases by $100/month: 7.8</li>
+        <li>If fixed costs decrease by $200/month: 8.0</li>
+      </ul>
+    </section>
+
+    <section class="stress-section">
+      <h2>Financial Stress</h2>
+      <div class="score-display">
+        <span class="score">6.7 / 10</span>
+        <span class="status elevated">ELEVATED</span>
+      </div>
+      <p class="scale">Low → Moderate → Elevated → High</p>
+
+      <h3>Financial Stress Report</h3>
+      <p>
+        Your savings and investment behavior are strong, but your fixed costs and debt obligations consume a
+        relatively large share of your income. Your financial position is currently stable, but reducing these
+        obligations would substantially increase your financial flexibility.
+      </p>
+    </section>
+  </div>
+</body>
+</html>
