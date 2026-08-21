@@ -1,1 +1,137 @@
-dummy text
+/* Base layout */
+body {
+  font-family: "Inter", Arial, sans-serif;
+  background: #f5f7fa;
+  margin: 0;
+  padding: 0;
+  color: #222;
+}
+
+.container {
+  max-width: 900px;
+  margin: 40px auto;
+  background: #fff;
+  padding: 40px;
+  border-radius: 12px;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+}
+
+/* Headings */
+h1 {
+  text-align: center;
+  margin-bottom: 30px;
+  font-size: 2.2rem;
+}
+
+h2 {
+  margin-top: 40px;
+  margin-bottom: 15px;
+  font-size: 1.6rem;
+  color: #333;
+}
+
+h3 {
+  margin-top: 20px;
+  font-size: 1.2rem;
+}
+
+/* Inputs */
+.inputs label {
+  display: block;
+  margin-bottom: 15px;
+  font-weight: 600;
+}
+
+.inputs input {
+  width: 100%;
+  padding: 10px;
+  margin-top: 6px;
+  border-radius: 6px;
+  border: 1px solid #ccc;
+  font-size: 1rem;
+}
+
+.computed {
+  margin-top: 20px;
+  padding: 12px;
+  background: #eef3ff;
+  border-left: 4px solid #4a6cf7;
+  border-radius: 6px;
+}
+
+/* Table */
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 10px;
+}
+
+table th,
+table td {
+  padding: 12px;
+  border-bottom: 1px solid #ddd;
+}
+
+table th {
+  text-align: left;
+  background: #f0f0f0;
+}
+
+/* Score sections */
+.score-display {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  margin: 10px 0;
+}
+
+.score {
+  font-size: 2rem;
+  font-weight: 700;
+}
+
+.status {
+  padding: 6px 14px;
+  border-radius: 6px;
+  font-weight: 600;
+  font-size: 0.9rem;
+}
+
+.status.stable {
+  background: #d9f7e8;
+  color: #0b8a4a;
+}
+
+.status.elevated {
+  background: #ffe8d9;
+  color: #c45a1a;
+}
+
+.scale {
+  font-size: 0.9rem;
+  color: #666;
+}
+
+/* Lists */
+.what-if ul {
+  padding-left: 20px;
+}
+
+.what-if li {
+  margin-bottom: 8px;
+}
+
+/* Responsive */
+@media (max-width: 600px) {
+  .container {
+    padding: 20px;
+  }
+
+  h1 {
+    font-size: 1.8rem;
+  }
+
+  .score {
+    font-size: 1.6rem;
+  }
+}
