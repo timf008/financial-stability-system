@@ -6,6 +6,7 @@ const debtEl = document.querySelector("#debt");
 const savingsEl = document.querySelector("#savings");
 const investEl = document.querySelector("#investments");
 const fixedEl = document.querySelector("#fixed");
+const grossIncomeEl = document.querySelector("#grossIncome");
 
 
 // ------------------------------
@@ -17,8 +18,8 @@ function pct(value, income) {
 
 
 // Surplus / Deficit after ALL five financial allocations
-function margin(netIncome, debt, savings, invest, fixed) {
-  return netIncome - (debt + savings + invest + fixed);
+function margin(netIncome, debt, savings, fixed) {
+  return netIncome - (debt + savings + fixed);
 }
 
 
@@ -93,57 +94,52 @@ function classifyStress(score) {
   return "HIGH";
 }
 
-
 // ------------------------------
 // MAIN CALCULATION ENGINE
 // ------------------------------
 function calculateAll(
   grossIncome,
+  netIncome,
   debt,
   savings,
   pretaxInvest,
   fixed
 ) {
 
-  // Income input represents monthly take-home income.
-  const netIncome = grossIncome;
-
-
   // ------------------------------
   // Percentages
   // ------------------------------
+
+  // Take-home obligations use NET income
   const pctDebt = pct(debt, netIncome);
-
   const pctSavings = pct(savings, netIncome);
-
-  // Investment rate remains measured against gross income
-  const pctInvest = pct(pretaxInvest, grossIncome);
-
   const pctFixed = pct(fixed, netIncome);
+
+  // Payroll contributions use GROSS income
+  const pctInvest = pct(pretaxInvest, grossIncome);
 
 
   // ------------------------------
   // SURPLUS / DEFICIT
   // ------------------------------
-  // This is an outcome, NOT a scored factor.
   //
-  // Income
+  // Net Income
   // - Debt
   // - Savings
-  // - Investments
   // - Fixed Costs
   // = Surplus / Deficit
+  //
+  // Pretax investments are NOT subtracted here
+  // because they have already been deducted
+  // before net income is received.
   //
   const m = margin(
     netIncome,
     debt,
     savings,
-    pretaxInvest,
     fixed
   );
 
-
-  // Margin percentage can be positive or negative.
   const pctMargin = pct(m, netIncome);
 
 
@@ -161,22 +157,6 @@ function calculateAll(
   // ------------------------------
   // FINANCIAL STABILITY SCORE
   // ------------------------------
-  //
-  // Original weighting:
-  // Savings      30%
-  // Investments  30%
-  // Fixed Costs  20%
-  // Debt         20%
-  //
-  // Total = 100%
-  //
-  // Normalize those weights to 100%:
-  //
-  // Savings      30.00%
-  // Investments  30.00%
-  // Debt         20.00%
-  // Fixed Costs  20.00%
-  //
   const stabilityWeighted =
     (scores.savings * 0.30) +
     (scores.invest * 0.30) +
@@ -193,16 +173,6 @@ function calculateAll(
   // ------------------------------
   // FINANCIAL STRESS SCORE
   // ------------------------------
-  //
-  // Stress is based on the two direct
-  // financial pressure factors:
-  //
-  // Debt Burden  40%
-  // Fixed Costs  60%
-  //
-  // Margin does NOT affect stress.
-  // Negative margin affects stability separately.
-
   const stressWeighted =
     (scores.debt * 0.40) +
     (scores.fixed * 0.60);
@@ -214,7 +184,6 @@ function calculateAll(
   // RETURN RESULTS
   // ------------------------------
   return {
-
     pct: {
       pctDebt,
       pctSavings,
@@ -231,23 +200,29 @@ function calculateAll(
 
     stressScore,
 
-    // Actual dollar surplus / deficit
     marginValue: m
   };
 }
 
-
 // ------------------------------
 // WHAT-IF ENGINE
 // ------------------------------
-function whatIf(income, debt, savings, invest, fixed) {
+function whatIf(
+  grossIncome,
+  netIncome,
+  debt,
+  savings,
+  invest,
+  fixed
+) {
 
   return {
 
     debtMinus300:
       calculateAll(
-        income,
-        debt - 300,
+        grossIncome,
+        netIncome,
+        Math.max(0, debt - 300),
         savings,
         invest,
         fixed
@@ -256,7 +231,8 @@ function whatIf(income, debt, savings, invest, fixed) {
 
     savingsPlus100:
       calculateAll(
-        income,
+        grossIncome,
+        netIncome,
         debt,
         savings + 100,
         invest,
@@ -266,11 +242,12 @@ function whatIf(income, debt, savings, invest, fixed) {
 
     fixedMinus200:
       calculateAll(
-        income,
+        grossIncome,
+        netIncome,
         debt,
         savings,
         invest,
-        fixed - 200
+        Math.max(0, fixed - 200)
       ).overall
 
   };
@@ -282,8 +259,8 @@ function whatIf(income, debt, savings, invest, fixed) {
 const stabilityWeights = {
   savings: 0.30,
   invest: 0.30,
-  debt: 0.30,
-  fixed: 0.10
+  debt: 0.20,
+  fixed: 0.20
 };
 
 
@@ -577,24 +554,23 @@ function buildStressReport(result, sorted) {
 // ------------------------------
 function updateUI() {
 
-  const grossIncome = Number(incomeEl.value);
+  const grossIncome = Number(grossIncomeEl.value);
+const netIncome = Number(incomeEl.value);
 
-  const debt = Number(debtEl.value);
-
-  const savings = Number(savingsEl.value);
-
-  const pretaxInvest = Number(investEl.value);
-
-  const fixed = Number(fixedEl.value);
+const debt = Number(debtEl.value);
+const savings = Number(savingsEl.value);
+const pretaxInvest = Number(investEl.value);
+const fixed = Number(fixedEl.value);
 
 
   const result = calculateAll(
-    grossIncome,
-    debt,
-    savings,
-    pretaxInvest,
-    fixed
-  );
+  grossIncome,
+  netIncome,
+  debt,
+  savings,
+  pretaxInvest,
+  fixed
+);
 
 
   // ------------------------------
@@ -680,12 +656,13 @@ function updateUI() {
 
 
   const wi = whatIf(
-    grossIncome,
-    debt,
-    savings,
-    pretaxInvest,
-    fixed
-  );
+  grossIncome,
+  netIncome,
+  debt,
+  savings,
+  pretaxInvest,
+  fixed
+);
 
 
   document.querySelector("#wiDebt").textContent =
@@ -794,6 +771,13 @@ function updateUI() {
 // ------------------------------
 // EVENT LISTENERS
 // ------------------------------
-[incomeEl, debtEl, savingsEl, investEl, fixedEl].forEach(el =>
+[
+  grossIncomeEl,
+  incomeEl,
+  debtEl,
+  savingsEl,
+  investEl,
+  fixedEl
+].forEach(el =>
   el.addEventListener("input", updateUI)
 );
