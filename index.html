@@ -1,0 +1,356 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Financial Stability System</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+
+<body>
+  <div class="container">
+
+    <img
+      src="financial_stability_system.png"
+      alt="Financial Stability System"
+      class="header-logo"
+    />
+
+    <!-- MONTHLY INPUTS -->
+    <section class="inputs">
+      <h2>Monthly Inputs</h2>
+
+      <label>
+        Monthly net income:
+        <span class="input-desc">How much you bring home each month</span>
+        <input id="income" type="number" placeholder="$0" />
+      </label>
+
+      <label>
+        Monthly debt payments:
+        <span class="input-desc">
+          Credit Cards, Auto Loans, Leases, Personal Loans, etc.
+        </span>
+        <input id="debt" type="number" placeholder="$0" />
+      </label>
+
+      <label>
+        Monthly savings:
+        <span class="input-desc">
+          Emergency Savings, Bank Accounts, Cash Holdings
+        </span>
+        <input id="savings" type="number" placeholder="$0" />
+      </label>
+
+      <label>
+        Monthly investments:
+        <span class="input-desc">
+          401(k), IRA, Brokerage Accounts, Other Long-Term Investments
+        </span>
+        <input id="investments" type="number" placeholder="$0" />
+      </label>
+
+      <label>
+        Monthly fixed costs:
+        <span class="input-desc">
+          Rent, Mortgage, Utilities, Phone, Cable, Wi-Fi, Subscriptions, etc.
+        </span>
+        <input id="fixed" type="number" placeholder="$0" />
+      </label>
+
+      <!-- SURPLUS / DEFICIT -->
+      <div class="computed">
+        <strong>Monthly Financial Position:</strong>
+        <span class="input-desc">
+          Surplus or deficit after all five inputs are accounted for
+        </span>
+
+        <span id="marginAmount" class="value">$0</span>
+        <span id="marginPct" class="value">0%</span>
+      </div>
+    </section>
+
+
+    <!-- FINANCIAL BREAKDOWN -->
+    <section class="table-section">
+      <h2>Financial Breakdown</h2>
+
+      <table>
+        <thead>
+          <tr>
+            <th>Factor</th>
+            <th>% of Income</th>
+            <th>Factor Score</th>
+          </tr>
+        </thead>
+
+        <tbody>
+
+          <tr>
+            <td>Debt burden</td>
+            <td id="debtPct">0%</td>
+            <td id="debtScore">0.0</td>
+          </tr>
+
+          <tr>
+            <td>Savings rate</td>
+            <td id="savingsPct">0%</td>
+            <td id="savingsScore">0.0</td>
+          </tr>
+
+          <tr>
+            <td>Investment rate</td>
+            <td id="investPct">0%</td>
+            <td id="investScore">0.0</td>
+          </tr>
+
+          <tr>
+            <td>Fixed costs</td>
+            <td id="fixedPct">0%</td>
+            <td id="fixedScore">0.0</td>
+          </tr>
+
+        </tbody>
+      </table>
+    </section>
+
+
+    <!-- TWO-COLUMN LAYOUT -->
+    <div class="two-column">
+
+      <!-- LEFT COLUMN -->
+      <div class="left-col">
+
+        <section class="score-section">
+          <h2>Financial Stability</h2>
+
+          <div class="score-display">
+            <span id="overallScore" class="score">
+              0.0 / 10
+            </span>
+
+            <span id="stabilityStatus" class="status stable">
+              STABLE
+            </span>
+          </div>
+
+          <p class="scale">
+            Unstable → Vulnerable → Stable → Strong
+          </p>
+        </section>
+
+      </div>
+
+
+      <!-- RIGHT COLUMN -->
+      <div class="right-col">
+
+        <section class="stress-section">
+          <h2>Financial Stress</h2>
+
+          <div class="score-display">
+            <span id="stressScore" class="score">
+              0.0 / 10
+            </span>
+
+            <span id="stressStatus" class="status elevated">
+              ELEVATED
+            </span>
+          </div>
+
+          <p class="scale">
+            Low → Moderate → Elevated → High
+          </p>
+        </section>
+
+      </div>
+
+    </div>
+
+
+    <!-- PROFILE CARD -->
+    <section class="profile-card">
+
+      <h2>Your Financial Profile</h2>
+
+      <div class="profile-row">
+
+        <p>
+          <strong>Strongest:</strong>
+          <span id="strongest">—</span>
+        </p>
+
+        <p>
+          <strong>Biggest Opportunity:</strong>
+          <span id="opportunity">—</span>
+        </p>
+
+      </div>
+
+
+      <h3>Stability Report:</h3>
+
+      <p id="report">
+        Enter values above to generate your personalized financial report.
+      </p>
+
+
+      <h3>Stress Report:</h3>
+
+      <p id="stressReport">
+        Enter values above to generate your stress analysis.
+      </p>
+
+    </section>
+
+
+    <!-- WHAT IF -->
+    <section class="what-if">
+
+      <h2>What If?</h2>
+
+      <p class="what-if-intro">
+        Explore how small monthly changes ripple through your overall stability.
+        Each scenario below shows how your score would shift if you adjusted one lever.
+      </p>
+
+
+      <ul class="what-if-list">
+
+        <li class="wi-item current">
+
+          <strong>Current Stability Score</strong>
+
+          <span id="wiCurrentScore" class="wi-value">
+            0.0
+          </span>
+
+          <small class="wi-note">
+            Your baseline — the starting point for every scenario.
+          </small>
+
+        </li>
+
+
+        <li class="wi-item positive">
+
+          <strong>Reduce debt by $300/month</strong>
+
+          <span id="wiDebt" class="wi-value">
+            0.0
+          </span>
+
+          <small class="wi-note">
+            Lower debt unlocks monthly breathing room and long-term resilience.
+          </small>
+
+        </li>
+
+
+        <li class="wi-item positive">
+
+          <strong>Increase savings by $100/month</strong>
+
+          <span id="wiSavings" class="wi-value">
+            0.0
+          </span>
+
+          <small class="wi-note">
+            Small boosts in savings can strengthen financial resilience.
+          </small>
+
+        </li>
+
+
+        <li class="wi-item positive">
+
+          <strong>Cut fixed costs by $200/month</strong>
+
+          <span id="wiFixed" class="wi-value">
+            0.0
+          </span>
+
+          <small class="wi-note">
+            Reducing recurring expenses strengthens your monthly buffer.
+          </small>
+
+        </li>
+
+      </ul>
+
+
+      <p class="what-if-footer">
+        These quick simulations show how tuning each lever impacts your financial engine.
+      </p>
+
+    </section>
+
+
+    <!-- 12-MONTH OUTLOOK -->
+    <section class="twelve-months">
+
+      <h2>In 12 Months You Could Have...</h2>
+
+      <div class="three-cards">
+
+        <div class="tm-card">
+
+          <h3>Investments</h3>
+
+          <p>
+            <strong>Monthly:</strong>
+            <span id="tmInvestMonthly">—</span>
+          </p>
+
+          <p>
+            <strong>12-Month Total:</strong>
+            <span id="tmInvestTotal">—</span>
+          </p>
+
+        </div>
+
+
+        <div class="tm-card">
+
+          <h3>Savings</h3>
+
+          <p>
+            <strong>Monthly:</strong>
+            <span id="tmSaveMonthly">—</span>
+          </p>
+
+          <p>
+            <strong>12-Month Total:</strong>
+            <span id="tmSaveTotal">—</span>
+          </p>
+
+        </div>
+
+
+        <div class="tm-card">
+
+          <h3>Cash Surplus</h3>
+
+          <p>
+            <strong>Monthly Position:</strong>
+            <span id="tmMarginMonthly">—</span>
+          </p>
+
+          <p>
+            <strong>12-Month Total:</strong>
+            <span id="tmMarginTotal">—</span>
+          </p>
+
+        </div>
+
+      </div>
+
+    </section>
+
+
+  </div>
+
+  <script src="app.js"></script>
+
+</body>
+</html>
