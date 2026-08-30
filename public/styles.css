@@ -35,6 +35,14 @@ h3 {
   font-size: 1.2rem;
 }
 
+.header-logo {
+  display: block;
+  margin: 0 auto 20px auto; /* center + spacing below */
+  max-width: 450px;         /* adjust size as needed */
+  height: auto;
+}
+
+
 /* Inputs */
 .inputs label {
   display: block;
@@ -58,6 +66,16 @@ h3 {
   border-left: 4px solid #4a6cf7;
   border-radius: 6px;
 }
+
+/* Input descriptions */
+.input-desc {
+  display: block;
+  font-size: 0.85rem;
+  color: #666;
+  margin-top: 4px;
+  margin-bottom: 6px;
+}
+
 
 /* Table */
 table {
@@ -112,6 +130,17 @@ table th {
   color: #666;
 }
 
+.left-col,
+.right-col {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;   /* centers horizontally */
+  text-align: center;    /* centers text inside */
+}
+
+
 /* Lists */
 .what-if ul {
   padding-left: 20px;
@@ -135,3 +164,226 @@ table th {
     font-size: 1.6rem;
   }
 }
+
+/* Your Financial Profile Card */
+
+/* Card container */
+.profile-card {
+  background: #ffffff;
+  border-radius: 12px;
+  padding: 20px 24px;
+  margin-top: 30px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+  border: 1px solid #e5e5e5;
+}
+
+/* Title */
+.profile-card h2 {
+  margin-top: 0;
+  font-size: 20px;
+  font-weight: 600;
+  color: #333;
+}
+
+/* Subheading */
+.profile-card h3 {
+  margin-top: 20px;
+  font-size: 1.2rem;
+  font-weight: 600;
+  color: #444;
+}
+
+/* Strongest / Opportunity row */
+.profile-row {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  margin-bottom: 12px;
+}
+
+/* Text styling */
+.profile-card p {
+  font-size: 1rem;
+  line-height: 1.5;
+  color: #444;
+}
+
+/* Highlighted values */
+.profile-card span {
+  font-weight: 600;
+  color: #0077cc;
+}
+
+/* Responsive */
+@media (min-width: 600px) {
+  .profile-row {
+    flex-direction: row;
+    justify-content: space-between;
+  }
+}
+
+.two-column {
+  display: flex;
+  gap: 30px;
+  margin-top: 30px;
+}
+
+.left-col,
+.right-col {
+  flex: 1;
+  min-width: 0;
+}
+
+.profile-card {
+  background: #ffffff;
+  border-radius: 12px;
+  padding: 20px 24px;
+  margin-top: 20px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+  border: 1px solid #e5e5e5;
+}
+
+.profile-card h2,
+.profile-card h3 {
+  margin-top: 0;
+  font-size: 1.4rem;
+  font-weight: 600;
+  color: #333;
+}
+
+.profile-card p {
+  font-size: 1rem;
+  line-height: 1.5;
+  color: #444;
+}
+
+.profile-row {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  margin-bottom: 12px;
+}
+
+.profile-card span {
+  font-weight: 600;
+  color: #0077cc;
+}
+
+@media (max-width: 800px) {
+  .two-column {
+    flex-direction: column;
+  }
+}
+
+/* 12-Month Section */
+.twelve-months {
+  margin-top: 40px;
+}
+
+.twelve-months h2 {
+  text-align: center;
+  margin-bottom: 25px;
+  font-size: 1.6rem;
+  color: #333;
+}
+
+/* Horizontal card layout */
+.three-cards {
+  display: flex;
+  gap: 20px;
+  justify-content: center;
+}
+
+/* Individual card */
+.tm-card {
+  background: #ffffff;
+  border-radius: 12px;
+  padding: 20px 24px;
+  width: 260px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+  border: 1px solid #e5e5e5;
+  text-align: center;
+}
+
+.tm-card h3 {
+  margin-top: 0;
+  font-size: 1.3rem;
+  font-weight: 600;
+  color: #333;
+}
+
+.tm-card p {
+  font-size: 1rem;
+  margin: 8px 0;
+  color: #444;
+}
+
+.tm-card span {
+  font-weight: 600;
+  color: #0077cc;
+}
+
+/* Responsive */
+@media (max-width: 700px) {
+  .three-cards {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .tm-card {
+    width: 100%;
+    max-width: 320px;
+  }
+}
+
+/* What If? */
+.what-if-list {
+  list-style: none;
+  padding: 0;
+  margin: 1rem 0;
+  display: grid;
+  gap: 1rem;
+}
+
+.wi-item {
+  padding: 1rem;
+  border-radius: 10px;
+  border: 1px solid #e3e6ea;
+  background: #fff;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.06);
+}
+
+.wi-item strong {
+  display: block;
+  font-size: 1rem;
+  margin-bottom: 0.3rem;
+}
+
+.wi-value {
+  font-size: 1.3rem;
+  font-weight: 700;
+  color: #2a4d9b;
+  display: block;
+  margin-bottom: 0.2rem;
+}
+
+.wi-note {
+  font-size: 0.8rem;
+  color: #777;
+}
+
+.wi-item.current {
+  border-left: 4px solid #2a4d9b;
+}
+
+.wi-item.positive {
+  border-left: 4px solid #3aa655;
+}
+
+.what-if-footer {
+  font-size: 0.9rem;
+  color: #555;
+  margin-top: 1rem;
+}
+
+
