@@ -11,7 +11,7 @@
   <div class="container">
 
     <img
-      src="images/financial_stability_system.png"
+      src="financial_stability_system.png"
       alt="Financial Stability System"
       class="header-logo"
     />
@@ -21,10 +21,16 @@
       <h2>Monthly Inputs</h2>
 
       <label>
-        Monthly net income:
-        <span class="input-desc">How much you bring home each month</span>
-        <input id="income" type="number" placeholder="$0" />
-      </label>
+  Monthly gross income:
+  <span class="input-desc">Income before taxes and payroll deductions</span>
+  <input id="grossIncome" type="number" placeholder="$0" />
+</label>
+
+<label>
+  Monthly net income:
+  <span class="input-desc">Take-home income after taxes and payroll deductions</span>
+  <input id="income" type="number" placeholder="$0" />
+</label>
 
       <label>
         Monthly debt payments:
